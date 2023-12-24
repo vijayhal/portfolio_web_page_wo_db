@@ -26,17 +26,17 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 Bootstrap5(app)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new_book_msg.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new_book_msg.db"
+#
+# db.init_app(app)
 
-db.init_app(app)
 
 
-
-class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_inpt = db.Column(db.String(50), nullable=False)
-    second_inpt = db.Column(db.String(50), nullable=False)
-    subject_inpt = db.Column(db.String(500), nullable=False)
+# class Book(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     first_inpt = db.Column(db.String(50), nullable=False)
+#     second_inpt = db.Column(db.String(50), nullable=False)
+#     subject_inpt = db.Column(db.String(500), nullable=False)
 
 
 # Optional: this will allow each book object to be identified by its title when printed.
@@ -57,11 +57,11 @@ def home():
 def submit():
     if request.method == 'POST':
 
-        data = request.form
-        with app.app_context():
-            new_book = Book(first_inpt = data["full_name"], second_inpt = data["email_id"], subject_inpt = data["subject"])
-            db.session.add(new_book)
-            db.session.commit()
+        # data = request.form
+        # with app.app_context():
+        #     new_book = Book(first_inpt = data["full_name"], second_inpt = data["email_id"], subject_inpt = data["subject"])
+        #     db.session.add(new_book)
+        #     db.session.commit()
 
 
 
