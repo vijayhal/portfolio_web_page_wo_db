@@ -1,23 +1,21 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap5
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import smtplib
 import os
 
 # On Windows type:
 # python -m pip install -r requirements.txt
 
-db = SQLAlchemy()
-
+# db = SQLAlchemy()
+#
 app = Flask(__name__)
 
 global user_mail
 global password
 
-
-
-user_mail = os.environ.get('USER')
-password = os.environ.get('PSS')
+user_mail = os.environ.get('USER_ID')
+login_password = os.environ.get('USER_PASSWORD')
 
 # to create a form we have to provide secret key
 
@@ -65,13 +63,13 @@ def submit():
 
 
 
-        with smtplib.SMTP("smtp.gmail.com") as connection:
+        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
             data = request.form
             connection.starttls()
-            connection.login(user=user_mail, password=password)
+            connection.login(user=user_mail, password=login_password)
             connection.sendmail(
             from_addr=user_mail,
-            to_addrs= {data["email_id"]},
+            to_addrs = {data["email_id"]},
             msg=f'subject:{data["subject"]}\n\nDear {data["full_name"]},\n\nThanks for your email.\n\n'
                             f'Your Message: {data["message_input"]}\n\n\n I will revert to you, soon.\n\n'
                 f'Regards\n\nVijay M Halagani')
